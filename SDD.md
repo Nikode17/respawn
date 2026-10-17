@@ -3,7 +3,7 @@
 
 **Versión:** 2.0.0
 **Estado:** Producción funcional — https://forogaming.vercel.app
-**Audiencia:** Claude Code / Equipo de desarrollo / Tribunal académico FP DAW
+**Audiencia:** Equipo de desarrollo / Tribunal académico FP DAW
 **Última actualización:** 2026-05-17
 
 > **Nota sobre la evolución del documento.** Las secciones 1-8 contienen el diseño técnico
@@ -32,7 +32,7 @@
 
 ### 1.1 Propósito del documento
 
-Este documento describe el diseño técnico de la aplicación web de foro de videojuegos. Está orientado al uso directo por parte de herramientas de desarrollo asistido (Claude Code) y desarrolladores, por lo que prioriza la precisión técnica y la completitud sobre la legibilidad para perfiles no técnicos.
+Este documento describe el diseño técnico de la aplicación web de foro de videojuegos. Está orientado al uso por parte del equipo de desarrollo, por lo que prioriza la precisión técnica y la completitud sobre la legibilidad para perfiles no técnicos.
 
 ### 1.2 Descripción del producto
 
@@ -603,7 +603,7 @@ Cliente                  Backend                 S3 / CDN
 ## 9. Estado actual — fases construidas (v2.0.0)
 
 Esta sección documenta lo que existe **hoy** en producción. Para historia cronológica
-detallada con fechas y commits, ver `JOURNAL.md`. Para cheatsheet operativa, ver `CLAUDE.md`.
+detallada con fechas y commits, consultar el historial del repositorio.
 
 ### 9.1 Stack tecnológico definitivo
 
@@ -954,7 +954,7 @@ Límite cliente: 10 imágenes por post. Validación dual: Zod en servidor + UI b
 ### 9.7 Operaciones y despliegue
 
 - **Auto-deploy:** push a `master` → Vercel detecta → build + deploy en 2-3 min.
-- **Migraciones a prod:** el runner debe ejecutarse manualmente desde local con `--env-file=.env.prod-temp`, **no** está integrado en el build de Vercel. Ver `JOURNAL.md` para el episodio de drift histórico.
+- **Migraciones a prod:** el runner debe ejecutarse manualmente desde local con `--env-file=.env.prod-temp`, **no** está integrado en el build de Vercel.
 - **Variables de entorno en Vercel:** configuradas manualmente desde el dashboard. Las críticas son `DATABASE_URL`, `JWT_SECRET`, `NEXT_PUBLIC_APP_URL`, `UPLOADTHING_TOKEN`/`SECRET`, `UPSTASH_REDIS_REST_URL`/`TOKEN`.
 - **Procedimiento para tocar prod desde local:**
   1. Crear `.env.prod-temp` (gitignored por patrón `.env*`).
@@ -962,12 +962,6 @@ Límite cliente: 10 imágenes por post. Validación dual: Zod en servidor + UI b
   3. Ejecutar script.
   4. **Borrar el archivo** (`Remove-Item .env.prod-temp`).
   5. Considerar rotar la password de Neon si la URL pasó por chat/script.
-
-### 9.8 Documentación complementaria
-
-- **`CLAUDE.md`** — cheatsheet operativa para Claude Code y desarrolladores. Auto-cargado en sesiones nuevas.
-- **`JOURNAL.md`** — historia cronológica con fechas y commits. Útil para entender por qué hay drift histórico.
-- **`README.md`** — (a futuro) onboarding para humanos nuevos al proyecto. Por ahora `CLAUDE.md` cumple esa función.
 
 ---
 
